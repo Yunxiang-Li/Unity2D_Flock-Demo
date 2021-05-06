@@ -62,6 +62,8 @@ Under **Assets** folder, there are altogether **6** subfolders:
 
 ## Design
 
+<div align="center"> <img src="https://github.com/Yunxiang-Li/Unity2D_Flock-Demo/blob/main/Screenshots%20and%20GIFs/class%20design.png"/> </div>
+
 For each flock, I design that it should have 3 basic behaviors: cohesion, alignment, and avoidance. For each flock agent (single bird) in a flock, each frame it should first try to gather with all other possible neighbors, then get average direction as the flock’s current frame’s direction, last check to see if each pair of two flock agents in the same block has a distance that exceeds a certain value.
 
 Next, I observe that the cohesion behavior is not smooth enough so that sometimes several flock agent objects may flick thus I write a **SteeredCohesionBehavior** class to solve this problem.
