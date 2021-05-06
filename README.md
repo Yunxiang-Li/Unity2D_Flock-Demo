@@ -21,7 +21,7 @@ In this game demo, there are altogether 3 different flocks (orange, blue and gre
 
 ## Exhibition
 
-<div align="center"> <img src="https://github.com/Yunxiang-Li/Unity3D_Box-Shooter/blob/master/Screenshots%20and%20GIFs/Level%201.PNG"/> </div>
+<div align="center"> <img src="https://github.com/Yunxiang-Li/Unity2D_Flock-Demo/blob/main/Screenshots%20and%20GIFs/class%20design.png"/> </div>
 
 ## Install
 
