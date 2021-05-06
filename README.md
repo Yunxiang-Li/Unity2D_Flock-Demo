@@ -11,6 +11,7 @@ A simple 2d flock demo based on Unity2D game engine.
 - [Install](#install)
 - [Usage](#usage)
 - [Structure](#Structure)
+- [Design](#Design)
 - [Maintainers](#Maintainers)
 - [License](#license)
 
@@ -58,6 +59,22 @@ Under **Assets** folder, there are altogether **6** subfolders:
 5. Scripts folder: contains **18** C# scripts I write for this game demo. Under **Behavior Scripts** subfolder, there are altogether **12** C# scripts about flock behaviors. Under **Editor** subfolder, there is **1** C# script called CompositeBehaviorEditor which uses Unity GUI module to generate a custom behaviors editor. Under **Filter Scripts** subfolder, there are **3** C# scripts about filters. In addition to these C# scripts, there are also **Flock.cs** and **FlockAgent.cs** files to represent a flock and each single bird.
 
 6. Sprites folder: contains **1** sprite for a single flock agent.
+
+## Design
+
+For each flock, I design that it should have 3 basic behaviors: cohesion, alignment, and avoidance. For each flock agent (single bird) in a flock, each frame it should first try to gather with all other possible neighbors, then get average direction as the flock’s current frame’s direction, last check to see if each pair of two flock agents in the same block has a distance that exceeds a certain value.
+
+Next, I observe that the cohesion behavior is not smooth enough so that sometimes several flock agent objects may flick thus I write a **SteeredCohesionBehavior** class to solve this problem.
+
+After all these designs, I find that maybe a composite behavior which contains all these 3 behaviors will be a better idea, then I just create a **Composite Behavior** Class (object) which will help us control all 3 basic behaviors in each frame.
+
+Then I find that flocks will just leave the current scene and never come back which is not very similar to real life experience. Therefore, I create a **StayInRadiusBehavior** class to let each flock fly in a certain circle area.
+
+Now all behaviors seem to be right for only one flock, in order to deal with multiple flocks’ issue, we need let each flock to know whether a specific flock agent belongs to it or not. Therefore, I design the filter part, create a **SameFlockFilter** to filter neighbors and attached this filter to generate all behaviors’ filtered version (no need for stay in radius behavior).
+
+For multiple flocks, all behaviors also work now. Finally, I want to add obstacle avoidance feature thus I create a **PhysicsLayerFilter** to let orange flock to avoid the yellow obstacle. However, according to Unity issue, obstacle avoidance feature only cares about the center of the obstacle. In order to also consider the Collider of the obstacle, I had to add several lines of codes in **FilteredAvoidanceBehavior** class. However, this feature sometimes still fails.
+
+For future plan, I will try to solve the obstacle avoidance issue first and then move this project to 3D version.
 
 ## Maintainers
 
